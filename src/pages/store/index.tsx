@@ -1,0 +1,113 @@
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs'
+import { TabsBuilder } from 'src/components'
+import OrderTable from '../orders/OrderTable'
+import ProductTable from 'src/components/product-table'
+
+type Props = {}
+
+function AllProducts() {
+  return (
+    <div className="">
+      <p className="text-white">Manage your Products</p>
+    </div>
+  )
+}
+
+function ManageStoreScreen() {
+  return (
+    <div className="">
+      <p className="text-white">Delete Product</p>
+    </div>
+  )
+}
+
+function Addproduct() {
+  return (
+    <div className="">
+      <p className="text-white">Add Product</p>
+    </div>
+  )
+}
+
+function ActionTabs() {
+  const TabButton = () => {
+    return (
+      // <div className="flex gap-x-4">
+      //   <p className="text-white">Add Product</p>
+      //   <p className="text-white">Delete Product</p>
+      //   <p className="text-white">Edit Product</p>
+      // </div>
+      <Tabs defaultValue="account" className="w-[400px]">
+        <TabsList>
+          <TabsTrigger value="account">Account</TabsTrigger>
+          <TabsTrigger value="password">Password</TabsTrigger>
+        </TabsList>
+        <TabsContent value="account">Make changes to your account here.</TabsContent>
+        <TabsContent value="password">Change your password here.</TabsContent>
+      </Tabs>
+    )
+  }
+
+  return (
+    <div className="">
+      <div className="">
+        <TabButton />
+      </div>
+    </div>
+  )
+}
+
+const tabItems = [
+  {
+    title: 'All Products',
+    value: 'all',
+    component: <AllProducts />,
+  },
+  {
+    title: 'Add Product',
+    value: 'pending',
+    component: <Addproduct />,
+  },
+  {
+    title: 'Manage Store',
+    value: 'cancelled',
+    component: <ManageStoreScreen />,
+  },
+]
+
+const products = [
+  {
+    name: 'Sandy hook Special',
+    image: '',
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus voluptate unde repellat reiciendisarchitecto quidem ad non accusantium distinctio quisquam accusamus provident, sequi harum et vero iusto ipsum quae fugit?',
+    price: 400,
+  },
+  {
+    name: 'Krabby Patty',
+    image: '',
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus voluptate unde repellat reiciendisarchitecto quidem ad non accusantium distinctio quisquam accusamus provident, sequi harum et vero iusto ipsum quae fugit?',
+    price: 400,
+  },
+  {
+    name: 'Orange Soda',
+    image: '',
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus voluptate unde repellat reiciendisarchitecto quidem ad non accusantium distinctio quisquam accusamus provident, sequi harum et vero iusto ipsum quae fugit?',
+    price: 400,
+  },
+]
+
+export function Store({}: Props) {
+  return (
+    <div className="px-4 pt-6">
+      <TabsBuilder defaultValue={tabItems?.[0].value} tabItems={tabItems} />
+      <div className=" pt-6">
+        <ProductTable products={products} />
+      </div>
+    </div>
+  )
+}

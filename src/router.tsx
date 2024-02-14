@@ -1,8 +1,9 @@
 import React from 'react'
-import { createHashRouter, RouteObject } from 'react-router-dom'
+import { createHashRouter, RouteObject, createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'
 import ErrorPage from './components/error-page'
 import { getDefaultLayout } from './components/layout'
 import HomePage from './pages/home'
+import { Dashboard } from './pages'
 
 export const routerObjects: RouteObject[] = [
   {
@@ -10,6 +11,15 @@ export const routerObjects: RouteObject[] = [
     Component: HomePage,
   },
 ]
+
+export const router = createBrowserRouter(
+  createRoutesFromElements(
+    <>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/dashboard/*" element={<Dashboard />} />
+    </>,
+  ),
+)
 
 export function createRouter(): ReturnType<typeof createHashRouter> {
   const routeWrappers = routerObjects.map((router) => {

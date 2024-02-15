@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Button } from '../ui/button'
 
 interface IProduct {
   name: string
@@ -120,16 +121,49 @@ export function AddProductTable({ products }: Props) {
 
   return (
     <div className="">
-      <div className="mx-auto grid max-w-2xl">
+      <div className="mx-auto grid max-w-2xl gap-y-4">
         <p className="text-white">Add new product.</p>
-        <label htmlFor="">Enter Product Name</label>
-        <input type="text" className="text-white" />
-        <label htmlFor="">Select Product Image</label>
+        <label className="text-white" htmlFor="">
+          Enter Product Name
+        </label>
+        <input
+          onChange={(e) => handleTextChange(e.target.name, e.target.value)}
+          name="name"
+          type="text"
+          className="text-white"
+        />
+        <label className="text-white" htmlFor="">
+          Select Product Image
+        </label>
         <input type="file" className="text-white" />
-        <label htmlFor="">Enter Product Description</label>
-        <input type="text" className="text-white" />
-        <label htmlFor="">Enter Product Price</label>
-        <input type="text" className="text-white" />
+        <label className="text-white" htmlFor="">
+          Enter Product Description
+        </label>
+        <input
+          onChange={(e) => handleTextChange(e.target.name, e.target.value)}
+          name="description"
+          type="text"
+          className="text-white"
+        />
+        <label className="text-white" htmlFor="">
+          Enter Product Price
+        </label>
+        <input
+          onChange={(e) => handleTextChange(e.target.name, e.target.value)}
+          name="price"
+          type="text"
+          className="text-white"
+        />
+        <label className="text-white" htmlFor="">
+          Enter Product status
+        </label>
+        <input
+          onChange={(e) => handleTextChange(e.target.name, e.target.value)}
+          name="status"
+          type="text"
+          className="text-white"
+        />
+        <Button>Add Product</Button>
       </div>
     </div>
   )

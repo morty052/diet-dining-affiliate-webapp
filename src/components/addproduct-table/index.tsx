@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Button } from '../ui/button'
 
 interface IProduct {
   name: string
@@ -125,80 +124,96 @@ export function AddProductTable({ products }: Props) {
   return (
     <>
       {/* <p className="text-center text-2xl text-white">Add new product.</p> */}
-      <div className=" mx-auto max-w-5xl grid-cols-2 gap-x-4 sm:grid">
+      <div className=" mx-auto max-w-5xl grid-cols-2 items-start gap-x-8 pt-6 sm:grid">
         {/* Product form */}
         <div className=" flex max-w-2xl flex-col gap-y-4">
-          <label className="text-white" htmlFor="">
-            Select Product Image
-          </label>
-          <input onChange={(e) => handleFileChange(e)} type="file" className="text-black" />
-          <label className="text-white" htmlFor="">
-            Enter Product Name
-          </label>
-          <input
-            value={newProduct.name}
-            onChange={(e) => handleTextChange(e.target.name, e.target.value)}
-            name="name"
-            type="text"
-            className="text-black"
-          />
+          <div className="flex flex-col">
+            <label className="h-48 w-48 border" htmlFor="img">
+              Select Product Image
+            </label>
+            <input id="img" onChange={(e) => handleFileChange(e)} type="file" className="hidden text-black" />
+          </div>
+          <div className="flex flex-col">
+            <label className="text-white" htmlFor="">
+              Enter Product Name
+            </label>
+            <input
+              value={newProduct.name}
+              onChange={(e) => handleTextChange(e.target.name, e.target.value)}
+              name="name"
+              type="text"
+              className="text-black"
+            />
+          </div>
 
-          <label className="text-white" htmlFor="">
-            Enter Product Description
-          </label>
-          <textarea
-            value={newProduct.description}
-            onChange={(e) => handleTextChange(e.target.name, e.target.value)}
-            name="description"
-            rows={4}
-            className="text-black"
-          />
-          <label className="text-white" htmlFor="">
-            Enter Product Price
-          </label>
-          <input
-            value={newProduct.price}
-            onChange={(e) => handleTextChange(e.target.name, e.target.value)}
-            name="price"
-            type="text"
-            className="text-black"
-          />
-          <label className="text-white" htmlFor="">
-            Enter Product status
-          </label>
-          <input
-            value={newProduct.status}
-            onChange={(e) => handleTextChange(e.target.name, e.target.value)}
-            name="status"
-            type="text"
-            className="text-black"
-          />
+          <div className="flex flex-col">
+            <label className="text-white" htmlFor="">
+              Enter Product Description
+            </label>
+            <textarea
+              value={newProduct.description}
+              onChange={(e) => handleTextChange(e.target.name, e.target.value)}
+              name="description"
+              rows={4}
+              className="text-black"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label className="text-white" htmlFor="">
+              Enter Product Price
+            </label>
+            <input
+              value={newProduct.price}
+              onChange={(e) => handleTextChange(e.target.name, e.target.value)}
+              name="price"
+              type="text"
+              className="text-black"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label className="text-white" htmlFor="">
+              Enter Product status
+            </label>
+            <input
+              value={newProduct.status}
+              onChange={(e) => handleTextChange(e.target.name, e.target.value)}
+              name="status"
+              type="text"
+              className="text-black"
+            />
+          </div>
         </div>
         {/* Product preview */}
         <div className=" flex max-w-2xl flex-col gap-y-4 ">
           {/* <p className="text-white">Preview</p> */}
 
-          <img src={newProduct.image} className=" w-48 object-contain " alt="" />
+          <div className="flex justify-end">
+            <div className="h-48 w-48 border">
+              <img src={newProduct.image} className=" h-full w-full object-contain " alt="" />
+            </div>
+          </div>
 
-          <div className="flex justify-between border-b p-2">
+          <div className="flex justify-between border-b py-2">
             <p className="text-white">Product Name:</p>
             <p className="text-white">{newProduct.name}</p>
           </div>
-          <div className="flex justify-between border-b p-2">
+          <div className="flex flex-col border-b py-2">
             <p className="text-white">Product Description:</p>
-            <p className="text-white">{newProduct.description}</p>
+            <div className="h-24 rounded-lg border bg-white px-2">
+              <p className="text-black">{newProduct.description}</p>
+            </div>
           </div>
-          <div className="flex justify-between border-b p-2">
+          <div className="flex justify-between border-b py-2">
             <p className="text-white">Product Price:</p>
             <p className="text-white">{newProduct.price}</p>
           </div>
-          <div className="flex justify-between border-b p-2">
+          <div className="flex justify-between border-b py-2">
             <p className="text-white">Product Status:</p>
             <p className="text-white">{newProduct.status}</p>
           </div>
-          <Button className="bg-white text-black" onClick={() => handleAddProduct()}>
+          {/* <Button className="bg-white text-black" onClick={() => handleAddProduct()}>
             Add Product
-          </Button>
+          </Button> */}
         </div>
       </div>
     </>

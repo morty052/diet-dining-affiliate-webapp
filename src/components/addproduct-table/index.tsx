@@ -6,6 +6,7 @@ interface IProduct {
   image: string
   description: string
   price: number
+  status: 'AVAILABLE' | 'OUT_OF_STOCK' | 'COMING_SOON' | string
 }
 
 type Props = {
@@ -18,6 +19,7 @@ export function AddProductTable({ products }: Props) {
     image: '',
     description: '',
     price: 0,
+    status: 'AVAILABLE',
   })
 
   const [AddedProducts, setAddedproducts] = useState<[] | IProduct[]>([])
@@ -30,6 +32,7 @@ export function AddProductTable({ products }: Props) {
       image: '',
       description: '',
       price: 0,
+      status: '',
     })
   }
 
@@ -54,24 +57,24 @@ export function AddProductTable({ products }: Props) {
   //       <TableCaption>Add new product.</TableCaption>
   //       <TableHeader>
   //         <TableRow>
-  //           <TableHead className=" text-white">Name</TableHead>
-  //           <TableHead className=" text-white">Image</TableHead>
-  //           <TableHead className=" text-white">Description</TableHead>
-  //           <TableHead className=" text-white">Price</TableHead>
-  //           <TableHead className=" text-white">Preview</TableHead>
+  //           <TableHead className=" text-black">Name</TableHead>
+  //           <TableHead className=" text-black">Image</TableHead>
+  //           <TableHead className=" text-black">Description</TableHead>
+  //           <TableHead className=" text-black">Price</TableHead>
+  //           <TableHead className=" text-black">Preview</TableHead>
   //         </TableRow>
   //       </TableHeader>
   //       <TableBody className=" divide-y">
   //         {AddedProducts?.map((product) => (
   //           <TableRow key={product.name} className="">
-  //             <TableCell className=" text-white">{product.name}</TableCell>
-  //             <TableCell className=" text-white">{product.image}</TableCell>
-  //             <TableCell className=" text-white">{product.description}</TableCell>
-  //             <TableCell className=" text-white">{product.price}</TableCell>
+  //             <TableCell className=" text-black">{product.name}</TableCell>
+  //             <TableCell className=" text-black">{product.image}</TableCell>
+  //             <TableCell className=" text-black">{product.description}</TableCell>
+  //             <TableCell className=" text-black">{product.price}</TableCell>
   //           </TableRow>
   //         ))}
   //         <TableRow className="">
-  //           <TableCell className="border-x  text-white">
+  //           <TableCell className="border-x  text-black">
   //             <input
   //               value={newProduct.name}
   //               onChange={(e) => handleTextChange(e.target.name, e.target.value)}
@@ -81,14 +84,14 @@ export function AddProductTable({ products }: Props) {
   //               type="text"
   //             />
   //           </TableCell>
-  //           <TableCell className="w-72 max-w-[250px] border-x text-white">
+  //           <TableCell className="w-72 max-w-[250px] border-x text-black">
   //             {!newProduct.image ? (
   //               <input onChange={(e) => handleFileChange(e)} placeholder="file" type="file" />
   //             ) : (
   //               <img src={newProduct.image} className="w-full" />
   //             )}
   //           </TableCell>
-  //           <TableCell className=" w-full border-x text-white">
+  //           <TableCell className=" w-full border-x text-black">
   //             <textarea
   //               value={newProduct.description}
   //               name="description"
@@ -98,7 +101,7 @@ export function AddProductTable({ products }: Props) {
   //               onChange={(e) => handleTextChange(e.target.name, e.target.value)}
   //             />
   //           </TableCell>
-  //           <TableCell className="border-x text-right text-white">
+  //           <TableCell className="border-x text-right text-black">
   //             <input
   //               name="price"
   //               value={newProduct.price}
@@ -108,7 +111,7 @@ export function AddProductTable({ products }: Props) {
   //               type="text"
   //             />
   //           </TableCell>
-  //           <TableCell className=" border-x text-right text-white">
+  //           <TableCell className=" border-x text-right text-black">
   //             <Button onClick={() => handleAddProduct()} className="bg-white text-black">
   //               Preview{' '}
   //             </Button>
@@ -120,51 +123,84 @@ export function AddProductTable({ products }: Props) {
   // )
 
   return (
-    <div className="">
-      <div className="mx-auto grid max-w-2xl gap-y-4">
-        <p className="text-white">Add new product.</p>
-        <label className="text-white" htmlFor="">
-          Enter Product Name
-        </label>
-        <input
-          onChange={(e) => handleTextChange(e.target.name, e.target.value)}
-          name="name"
-          type="text"
-          className="text-white"
-        />
-        <label className="text-white" htmlFor="">
-          Select Product Image
-        </label>
-        <input type="file" className="text-white" />
-        <label className="text-white" htmlFor="">
-          Enter Product Description
-        </label>
-        <input
-          onChange={(e) => handleTextChange(e.target.name, e.target.value)}
-          name="description"
-          type="text"
-          className="text-white"
-        />
-        <label className="text-white" htmlFor="">
-          Enter Product Price
-        </label>
-        <input
-          onChange={(e) => handleTextChange(e.target.name, e.target.value)}
-          name="price"
-          type="text"
-          className="text-white"
-        />
-        <label className="text-white" htmlFor="">
-          Enter Product status
-        </label>
-        <input
-          onChange={(e) => handleTextChange(e.target.name, e.target.value)}
-          name="status"
-          type="text"
-          className="text-white"
-        />
-        <Button>Add Product</Button>
+    <>
+      {/* <p className="text-center text-2xl text-white">Add new product.</p> */}
+      <div className=" mx-auto max-w-5xl grid-cols-2 gap-x-4 sm:grid">
+        {/* Product form */}
+        <div className=" flex max-w-2xl flex-col gap-y-4">
+          <label className="text-white" htmlFor="">
+            Select Product Image
+          </label>
+          <input onChange={(e) => handleFileChange(e)} type="file" className="text-black" />
+          <label className="text-white" htmlFor="">
+            Enter Product Name
+          </label>
+          <input
+            value={newProduct.name}
+            onChange={(e) => handleTextChange(e.target.name, e.target.value)}
+            name="name"
+            type="text"
+            className="text-black"
+          />
+
+          <label className="text-white" htmlFor="">
+            Enter Product Description
+          </label>
+          <textarea
+            value={newProduct.description}
+            onChange={(e) => handleTextChange(e.target.name, e.target.value)}
+            name="description"
+            rows={4}
+            className="text-black"
+          />
+          <label className="text-white" htmlFor="">
+            Enter Product Price
+          </label>
+          <input
+            value={newProduct.price}
+            onChange={(e) => handleTextChange(e.target.name, e.target.value)}
+            name="price"
+            type="text"
+            className="text-black"
+          />
+          <label className="text-white" htmlFor="">
+            Enter Product status
+          </label>
+          <input
+            value={newProduct.status}
+            onChange={(e) => handleTextChange(e.target.name, e.target.value)}
+            name="status"
+            type="text"
+            className="text-black"
+          />
+        </div>
+        {/* Product preview */}
+        <div className=" flex max-w-2xl flex-col gap-y-4 ">
+          {/* <p className="text-white">Preview</p> */}
+
+          <img src={newProduct.image} className=" w-48 object-contain " alt="" />
+
+          <div className="flex justify-between border-b p-2">
+            <p className="text-white">Product Name:</p>
+            <p className="text-white">{newProduct.name}</p>
+          </div>
+          <div className="flex justify-between border-b p-2">
+            <p className="text-white">Product Description:</p>
+            <p className="text-white">{newProduct.description}</p>
+          </div>
+          <div className="flex justify-between border-b p-2">
+            <p className="text-white">Product Price:</p>
+            <p className="text-white">{newProduct.price}</p>
+          </div>
+          <div className="flex justify-between border-b p-2">
+            <p className="text-white">Product Status:</p>
+            <p className="text-white">{newProduct.status}</p>
+          </div>
+          <Button className="bg-white text-black" onClick={() => handleAddProduct()}>
+            Add Product
+          </Button>
+        </div>
       </div>
-    </div>
+    </>
   )
 }

@@ -1,9 +1,6 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs'
 import { AddProductTable, TabsBuilder } from 'src/components'
-import OrderTable from '../orders/OrderTable'
-import ProductTable from 'src/components/product-table'
 
 type Props = {}
 
@@ -103,7 +100,7 @@ const products = [
 
 export function Store({}: Props) {
   return (
-    <div className="px-4 pt-6">
+    <div className="mx-auto max-w-5xl px-4 pt-6">
       <TabsBuilder defaultValue={tabItems?.[0].value} tabItems={tabItems} />
       <div className=" pt-6"></div>
     </div>
